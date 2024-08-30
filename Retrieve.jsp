@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html>
@@ -16,7 +15,7 @@
             String dbPassword = "root"; // Replace with your MySQL password
 
             try (Connection connection = DriverManager.getConnection(dbURL, dbUser, dbPassword)) {
-                String sql = "SELECT id, file_name, tempo, genre, description FROM audio_files";
+                String sql = "SELECT id, file_name, tempo, genre, description, audio_key FROM audio_files";
                 PreparedStatement statement = connection.prepareStatement(sql);
                 ResultSet resultSet = statement.executeQuery();
 
@@ -26,6 +25,7 @@
                     String tempo = resultSet.getString("tempo");
                     String genre = resultSet.getString("genre");
                     String description = resultSet.getString("description");
+                    String audioKey = resultSet.getString("audio_key");
 
         %>
                     <li>
@@ -33,8 +33,9 @@
                         <p><strong>Tempo:</strong> <%= tempo %></p>
                         <p><strong>Genre:</strong> <%= genre %></p>
                         <p><strong>Description:</strong> <%= description %></p>
+                        <p><strong>Key:</strong> <%= audioKey %></p>
                         <audio controls>
-                            <source src="RetrieveAudioServlet?id=<%= id %>" type="audio/*">
+                            <source src="RetrieveAudioServlet?id=<%= id %>" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
                         <br>
