@@ -38,6 +38,23 @@ function generateFields() {
             '<br>' +
             '<label for="description' + index + '">Description:</label>' +
             '<textarea id="description' + index + '" name="description' + index + '" rows="2" cols="50" required></textarea>' +
+            '<br>' +
+            '<label for="key' + index + '">Key:</label>' +
+            '<select id="key' + index + '" name="key' + index + '" required>' +
+            	'<option value="ATONAL">ATONAL</option>' +
+                '<option value="C">C</option>' +
+                '<option value="C#">C#</option>' +
+                '<option value="D">D</option>' +
+                '<option value="D#">D#</option>' +
+                '<option value="E">E</option>' +
+                '<option value="F">F</option>' +
+                '<option value="F#">F#</option>' +
+                '<option value="G">G</option>' +
+                '<option value="G#">G#</option>' +
+                '<option value="A">A</option>' +
+                '<option value="A#">A#</option>' +
+                '<option value="B">B</option>' +
+            '</select>' +
             '<br><br>';
 
         // Append the fileDiv to the form container
