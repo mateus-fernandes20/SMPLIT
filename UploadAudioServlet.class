@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 
-@WebServlet("/UploadServlet")
+@WebServlet("/UploadAudioServlet")
 @MultipartConfig
 public class UploadAudioServlet extends HttpServlet {
 
@@ -36,25 +36,28 @@ public class UploadAudioServlet extends HttpServlet {
                     String fileName = extractFileName(filePart);
                     InputStream fileInputStream = filePart.getInputStream();
 
-                    // Retrieve the tempo, genre, and description for each file
+                    // Retrieve the tempo, genre, description, and key for each file
                     String tempo = request.getParameter("tempo" + fileIndex);
                     String genre = request.getParameter("genre" + fileIndex);
                     String description = request.getParameter("description" + fileIndex);
+                    String key = request.getParameter("key" + fileIndex);
 
                     // Debugging: Print the values to the console
                     System.out.println("Processing file: " + fileName);
                     System.out.println("Tempo: " + tempo);
                     System.out.println("Genre: " + genre);
                     System.out.println("Description: " + description);
+                    System.out.println("Key: " + key);
 
                     // Insert into the database
-                    String sql = "INSERT INTO audio_files (file_name, file_data, tempo, genre, description) VALUES (?, ?, ?, ?, ?)";
+                    String sql = "INSERT INTO audio_files (file_name, file_data, tempo, genre, description, audio_key) VALUES (?, ?, ?, ?, ?, ?)";
                     PreparedStatement statement = connection.prepareStatement(sql);
                     statement.setString(1, fileName);
                     statement.setBlob(2, fileInputStream);
                     statement.setString(3, tempo);
                     statement.setString(4, genre);
                     statement.setString(5, description);
+                    statement.setString(6, key);
 
                     int rowsInserted = statement.executeUpdate();
                     if (rowsInserted <= 0) {
@@ -75,7 +78,6 @@ public class UploadAudioServlet extends HttpServlet {
             response.getWriter().println("Database error: " + e.getMessage());
         }
     }
-
 
     private String extractFileName(Part part) {
         String contentDisp = part.getHeader("content-disposition");
