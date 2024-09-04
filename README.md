@@ -1,2 +1,2 @@
 # SMPLIT
-audio sharing plataform
+sample sharing plataform
