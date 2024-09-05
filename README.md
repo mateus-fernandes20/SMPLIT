@@ -45,7 +45,7 @@ List of features our plataform should have:
   - [ ] Genre
   - [ ] Key
 - [ ] Sign-up
-- [ ] Login
+- [x] Login
 - [ ] Sample Packs
 - [ ] Pricing
 
