@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMPLIT - Inicio</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #141313;
+            color: #ffffff;
+        }
+
+        /* Barra de navegação */
+        nav {
+            background-color: #000000;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            color: #fff;
+            padding: 15px 40px;
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
+            background-color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 140px auto 0 auto;
+            padding: 20px;
+        }
+        img {
+            width: 170px; /* Defina o tamanho da imagem conforme necessário */
+            height: auto;
+            margin-right: 25px;
+            margin-left: 35px;
+            margin-top: -8px; /**/
+        }
+        
+
+        /* Painel de pesquisa */
+        .search-panel {
+            background-color: #252525;
+            background-image: url('/src/main/imagens/notebookfone.PNG'); /* Substitua pelo caminho da sua imagem */
+            background-size: cover; /* Faz com que a imagem cubra toda a área do painel */
+            background-position: center; /* Centraliza a imagem */
+            padding: 59px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .search-panel input {
+            width: 80%;
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background-color: #2b2b2b;
+            color: #fff;
+            margin-right: 10px;
+        }
+
+        .search-panel button {
+            padding: 15px 30px;
+            background-color: #c32828e1;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .search-panel button:hover {
+            background-color: #ff0000;
+        }
+
+        /* Seção de músicas */
+        .music-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 20px;
+        }
+
+        .music-card {
+            background-color: #282828;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            text-align: left;
+        }
+
+        .music-card h3 {
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .music-card p {
+            margin: 5px 0;
+            color: #aaa;
+        }
+
+        .music-card .actions {
+            margin-top: 15px;
+        }
+
+        .music-card audio {
+            width: 100%;
+            margin-top: 10px;
+            outline: none;
+        }
+
+        .music-card button {
+            padding: 10px 20px;
+            background-color: #333333;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .music-card button:hover {
+            background-color: #555;
+        }
+
+        .music-card .actions button {
+        padding: 10px 20px;
+        background-color: #c32828e1;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 10px;
+}
+
+        .music-card .actions button:hover {
+        background-color: #ff0505;
+}
+
+
+        /* Resultados da pesquisa */
+        .search-results {
+            display: none; /* Escondido até que uma pesquisa seja realizada */
+            margin-top: 50px;
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .search-results h2 {
+            font-size: 28px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .search-results .result-item {
+            background-color: #202020;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .result-item h4 {
+            font-size: 20px;
+            color: #fff;
+        }
+
+        .result-item p {
+            color: #aaa;
+        }
+
+        .no-results-message {
+          background-color: #323232;
+          color: #ffffff;
+          border: 1px solid #000000;
+          border-radius: 0px;
+          padding: 20px;
+          margin-top: 40px;
+        }
+
+        /*rodapé*/
+        footer {
+            height: 100%;
+            margin: 0;
+            background-color: #282828;
+            padding: 20px;
+            text-align: center;
+            color: #aaa;
+            width: 100%;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            color: #ccc;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Barra de navegação -->
+    <nav>
+        <ul>
+            <div> <img src="/src/main/imagens/logo.PNG" alt="Logo"> </div>
+            <div>
+            <li><a href="paginaprincipal.html">Início</a></li>
+            <li><a href="paginasobrenos.html">Sobre Nós</a></li>
+            <li><a href="paginaperfilusuario.html">Conta</a></li>
+            
+        </div>
+        </ul>
+    </nav>
+
+    <!-- Conteúdo principal -->
+    <div class="container">
+
+        <!-- Painel de pesquisa -->
+        <div class="search-panel">
+            <input type="text" id="search-input" placeholder="Pesquise samples pelo nome, gênero, tempo, e key">
+            <button onclick="performSearch()">Pesquisar</button>
+        </div>
+
+        <!-- Seção de resultados da pesquisa -->
+        <div id="search-results" class="search-results">
+    <!-- Resultados da pesquisa serão exibidos aqui -->
+        </div>
+
+        <!-- Mensagem de erro -->
+        <div id="no-results-message" class="no-results-message" style="display: none;">
+        Infelizmente não encontramos o que você está procurando. Certifique-se de digitar corretamente o que você procura ou tente fazer sua pesquisa de outra forma: Nossa plataforma permite você pesquisar samples por nome, gênero, tempo e key.
+        </div>
+
+        <!-- Seção de músicas -->
+        <section class="music-section" id="music-section">
+            <div>
+            <h2 style="color: #fff; margin-bottom: 20px;"> Selecionamos alguns samples para você conferir:</h2>
+            </div>
+            <div>
+            </div>
+            <div class="music-card">
+                <h3>Sample 1</h3>
+                <p>Artista: <a href="paginaperfilusuariopublico.html">DJ Example</a></p>
+                <p>Gênero: Gênero</p>
+                <p>Tempo: Tempo</p>
+                <p>Key: Key</p>
+                <audio controls>
+                    <source src="sample1.mp3" type="audio/mpeg">
+                    Seu navegador não suporta o player de áudio.
+                </audio>
+                <div class="actions">
+                    <a href="sample1.mp3" download="Sample1 - DJ Example.mp3">
+                        <button>Download</button>
+                    </a>
+                </div>
+            </div>
+        
+            <div class="music-card">
+                <h3>Sample 2</h3>
+                <p>Artista: <a href="paginaperfilusuariopublico.html">DJ Example</a></p>
+                <p>Gênero: Gênero</p>
+                <p>Tempo: Tempo</p>
+                <p>Key: Key</p>
+                <audio controls>
+                    <source src="sample2.mp3" type="audio/mpeg">
+                    Seu navegador não suporta o player de áudio.
+                </audio>
+                <div class="actions">
+                    <a href="sample2.mp3" download="Sample2 - DJ Sample.mp3">
+                        <button>Download</button>
+                    </a>
+                </div>
+            </div>
+        
+            <div class="music-card">
+                <h3>Sample 3</h3>
+                <p>Artista: <a href="paginaperfilusuariopublico.html">DJ Example</a></p>
+                <p>Gênero: Gênero</p>
+                <p>Tempo: Tempo</p>
+                <p>Key: Key</p>
+                <audio controls>
+                    <source src="sample3.mp3" type="audio/mpeg">
+                    Seu navegador não suporta o player de áudio.
+                </audio>
+                <div class="actions">
+                    <a href="sample3.mp3" download="Sample3 - DJ Sound.mp3">
+                        <button>Download</button>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+       function performSearch() {
+    var searchInput = document.getElementById('search-input').value;
+    var musicSection = document.getElementById('music-section');
+    var searchResults = document.getElementById('search-results');
+    var noResultsMessage = document.getElementById('no-results-message');
+
+    // Simula a lógica de pesquisa
+    // Substitua esta parte com a lógica real de pesquisa que você está usando
+    var hasResults = false; // Você deve substituir isso com a lógica real
+
+    if (searchInput) {
+        musicSection.style.display = 'none'; // Esconde os cartões de músicas
+        searchResults.classList.add('active'); // Exibe os resultados da pesquisa
+
+        if (hasResults) {
+            noResultsMessage.style.display = 'none'; // Esconde a mensagem de erro
+        } else {
+            noResultsMessage.style.display = 'block'; // Exibe a mensagem de erro
+        }
+    } else {
+        searchResults.classList.remove('active'); // Esconde os resultados da pesquisa
+        musicSection.style.display = 'grid'; // Exibe os cartões de músicas novamente
+        noResultsMessage.style.display = 'none'; // Esconde a mensagem de erro
+    } }
+    </script>
+
+
+    <!-- Rodapé -->
+<footer style="background-color: #282828; padding: 20px; text-align: center; color: #aaa; position: relative; bottom: 0; width: 100%;">
+    <p>&copy; 2024 SMPLIT. Todos os direitos reservados.</p>
+    <p>
+        <a href="#" style="color: #fff; text-decoration: none; margin: 0 10px;">Termos de Serviço</a> |
+        <a href="#" style="color: #fff; text-decoration: none; margin: 0 10px;">Política de Privacidade</a>
+    </p>
+</footer>
+
+</body>
+</html>

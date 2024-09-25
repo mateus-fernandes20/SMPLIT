@@ -37,7 +37,7 @@ public class DownloadAudioServlet extends HttpServlet {
         try {
             String dbURL = "jdbc:mysql://localhost:3306/smplit";
             String dbUser = "root";
-            String dbPassword = "root"; // Replace with your MySQL password
+            String dbPassword = "root";
             conn = DriverManager.getConnection(dbURL, dbUser, dbPassword);
 
             String sql = "SELECT file_name, file_data FROM audio_files WHERE id = ?";

@@ -16,16 +16,16 @@ import jakarta.servlet.http.Part;
 
 @WebServlet("/UploadAudioServlet")
 @MultipartConfig
-public class UploadAudioServlet extends HttpServlet {
+public class UploadAudio extends HttpServlet {
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/smplit";
+	private static final String DB_URL = "jdbc:mysql://localhost:3306/smplit";
     private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "root"; // Replace with your MySQL password
+    private static final String DB_PASSWORD = "root";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Collection<Part> fileParts = request.getParts(); // Retrieves all the file parts
+        Collection<Part> fileParts = request.getParts();
         boolean uploadSuccess = true;
         int fileIndex = 0;
 
@@ -36,21 +36,22 @@ public class UploadAudioServlet extends HttpServlet {
                     String fileName = extractFileName(filePart);
                     InputStream fileInputStream = filePart.getInputStream();
 
-                    // Retrieve the tempo, genre, description, and key for each file
+                    String cpf = request.getParameter("cpf");
                     String tempo = request.getParameter("tempo" + fileIndex);
                     String genre = request.getParameter("genre" + fileIndex);
                     String description = request.getParameter("description" + fileIndex);
                     String key = request.getParameter("key" + fileIndex);
 
-                    // Debugging: Print the values to the console
+                    // Debugging prints
                     System.out.println("Processing file: " + fileName);
+                    System.out.println("CPF: " + cpf);
                     System.out.println("Tempo: " + tempo);
                     System.out.println("Genre: " + genre);
                     System.out.println("Description: " + description);
                     System.out.println("Key: " + key);
+                    
 
-                    // Insert into the database
-                    String sql = "INSERT INTO audio_files (file_name, file_data, tempo, genre, description, audio_key) VALUES (?, ?, ?, ?, ?, ?)";
+                    String sql = "INSERT INTO audio_files (file_name, file_data, tempo, genre, description, audio_key, cpf) VALUES (?, ?, ?, ?, ?, ?, ?)";
                     PreparedStatement statement = connection.prepareStatement(sql);
                     statement.setString(1, fileName);
                     statement.setBlob(2, fileInputStream);
@@ -58,6 +59,7 @@ public class UploadAudioServlet extends HttpServlet {
                     statement.setString(4, genre);
                     statement.setString(5, description);
                     statement.setString(6, key);
+                    statement.setString(7, cpf);
 
                     int rowsInserted = statement.executeUpdate();
                     if (rowsInserted <= 0) {

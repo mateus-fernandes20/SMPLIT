@@ -17,7 +17,7 @@ public class GetAudioServlet extends HttpServlet {
 
     private static final String DB_URL = "jdbc:mysql://localhost:3306/smplit";
     private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "root"; // Replace with your MySQL password
+    private static final String DB_PASSWORD = "root";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

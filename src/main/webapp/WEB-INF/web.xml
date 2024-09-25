@@ -30,24 +30,12 @@
     <url-pattern>/Servlet</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description></description>
-    <display-name>LoginServlet</display-name>
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>LoginServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/LoginServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>LoginServle</display-name>
-    <servlet-name>LoginServle</servlet-name>
-    <servlet-class>cscorner.LoginServle</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LoginServle</servlet-name>
-    <url-pattern>/LoginServle</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -88,5 +76,45 @@
   <servlet-mapping>
     <servlet-name>RetrieveAudioServlet</servlet-name>
     <url-pattern>/RetrieveAudioServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Login</display-name>
+    <servlet-name>Login</servlet-name>
+    <servlet-class>LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/Login</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UploadAudio</display-name>
+    <servlet-name>UploadAudio</servlet-name>
+    <servlet-class>UploadAudio</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadAudio</servlet-name>
+    <url-pattern>/UploadAudio</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateProfileServlet</display-name>
+    <servlet-name>UpdateProfileServlet</servlet-name>
+    <servlet-class>UpdateProfileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateProfileServlet</servlet-name>
+    <url-pattern>/UpdateProfileServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteAudioServlet</display-name>
+    <servlet-name>DeleteAudioServlet</servlet-name>
+    <servlet-class>DeleteAudioServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteAudioServlet</servlet-name>
+    <url-pattern>/DeleteAudioServlet</url-pattern>
   </servlet-mapping>
 </web-app>

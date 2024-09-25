@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SMPLIT - Inicio</title>
     <style>
-        /* Styles adapted from the new file */
         body, h2, ul, li, p, a, audio {
             margin: 0;
             padding: 0;
@@ -28,40 +27,28 @@
             text-align: left;
         }
 
-        .stock-ticker {
-            position: absolute;
-            left: 0px;
-            right: 0px;
-            top: 0px;
-            height: 30px;
-            margin-bottom: 5px;
-            font-size: 15px;
-            font-family: "JetBrains Mono";
-            font-style: italic;
-            font-weight: 500;
-            border-block: 1px solid;
-            overflow: hidden;
-            display: flex;
-            gap: 2rem;
-        }
-
-        .stock-ticker ul {
-            box-shadow: none;
-            padding: 25px;
-            list-style: none;
-            flex-shrink: 0;
-            min-width: 100%;
+        .search-bar {
+            margin-bottom: 20px;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            gap: 2rem;
-            animation: scroll 50s linear infinite;
         }
 
-        @keyframes scroll {
-            to {
-                transform: translateX(calc(-100% - 20px));
-            }
+        .search-bar input[type="text"], .search-bar select {
+            padding: 10px;
+            margin-right: 10px;
+            width: 200px;
+        }
+
+        .search-bar button {
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .search-bar button:hover {
+            background-color: #2980b9;
         }
 
         .music-section {
@@ -129,32 +116,60 @@
 </head>
 <body>
 
-    <!-- Header with Logo -->
-    <div class="header">
-        <a href="Retrieve.jsp"><img src="logotipo.jpg" width="128" height="50"/></a>
-    </div>
-
-    <!-- Stock Ticker -->
-    <div class="stock-ticker">
-        <ul>
-            <li>
-                <span class="avisos">In sound and music, sampling is the reuse of a portion (or sample) of a sound recording in another recording...</span>
-                <span class="avisos">///</span>
-            </li>
-        </ul>
-    </div>
+    <!-- Search Bar -->
+    <form class="search-bar" method="get" action="home.jsp">
+        <input type="text" name="searchName" placeholder="Nome do Áudio" value="<%= request.getParameter("searchName") %>">
+        <input type="text" name="searchGenre" placeholder="Gênero" value="<%= request.getParameter("searchGenre") %>">
+        <input type="text" name="searchTempo" placeholder="Tempo" value="<%= request.getParameter("searchTempo") %>">
+        <input type="text" name="searchKey" placeholder="Chave" value="<%= request.getParameter("searchKey") %>">
+        <button type="submit">Buscar</button>
+    </form>
 
     <!-- Music Section -->
     <div class="music-section">
         <%
-            // Database connection
+            String searchName = request.getParameter("searchName");
+            String searchGenre = request.getParameter("searchGenre");
+            String searchTempo = request.getParameter("searchTempo");
+            String searchKey = request.getParameter("searchKey");
+
             String dbURL = "jdbc:mysql://localhost:3306/smplit";
             String dbUser = "root";
             String dbPassword = "root";
 
             try (Connection connection = DriverManager.getConnection(dbURL, dbUser, dbPassword)) {
-                String sql = "SELECT id, file_name, tempo, genre, description, audio_key FROM audio_files";
+                String sql = "SELECT id, file_name, tempo, genre, description, audio_key FROM audio_files WHERE 1=1";
+
+                if (searchName != null && !searchName.isEmpty()) {
+                    sql += " AND file_name LIKE ?";
+                }
+                if (searchGenre != null && !searchGenre.isEmpty()) {
+                    sql += " AND genre LIKE ?";
+                }
+                if (searchTempo != null && !searchTempo.isEmpty()) {
+                    sql += " AND tempo LIKE ?";
+                }
+                if (searchKey != null && !searchKey.isEmpty()) {
+                    sql += " AND audio_key LIKE ?";
+                }
+
                 PreparedStatement statement = connection.prepareStatement(sql);
+
+                int paramIndex = 1;
+
+                if (searchName != null && !searchName.isEmpty()) {
+                    statement.setString(paramIndex++, "%" + searchName + "%");
+                }
+                if (searchGenre != null && !searchGenre.isEmpty()) {
+                    statement.setString(paramIndex++, "%" + searchGenre + "%");
+                }
+                if (searchTempo != null && !searchTempo.isEmpty()) {
+                    statement.setString(paramIndex++, "%" + searchTempo + "%");
+                }
+                if (searchKey != null && !searchKey.isEmpty()) {
+                    statement.setString(paramIndex++, "%" + searchKey + "%");
+                }
+
                 ResultSet resultSet = statement.executeQuery();
 
                 while (resultSet.next()) {
