@@ -31,7 +31,7 @@ public class UpdateProfileServlet extends HttpServlet {
 		try {
 			conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 
-            String sql = "UPDATE users SET name = ?, nascimento = ?, email = ?, phone = ? WHERE cpf = ?";
+            String sql = "UPDATE users SET nome = ?, nascimento = ?, email = ?, phone = ? WHERE cpf = ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, name);
             pstmt.setString(2, nascimento);

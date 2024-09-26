@@ -12,15 +12,14 @@ import java.sql.SQLException;
 
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/smplit"; // Replace with your DB
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/smplit";
     private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "root"; // Replace with your MySQL password
+    private static final String DB_PASSWORD = "root";
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Get form parameters
         String cpf = request.getParameter("cpf");
         String email = request.getParameter("email");
         String nome = request.getParameter("nome");
@@ -31,7 +30,6 @@ public class RegisterServlet extends HttpServlet {
         
 
         try {
-            // Insert user into database
             Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 
             String sql = "INSERT INTO user (cpf, email, nome, senha, telefone, nascimento, sexo) VALUES (?, ?, ?, ?, ?, ?, ?)";
