@@ -44,7 +44,7 @@ List of features our plataform should have:
   - [x] Tempo
   - [x] Genre
   - [x] Key
-- [ ] Sign-up
+- [x] Sign-up
 - [x] Login
 - [ ] Sample Packs
 - [ ] Pricing
