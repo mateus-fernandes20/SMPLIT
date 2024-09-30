@@ -40,10 +40,10 @@ List of features our plataform should have:
 
 - [x] Audio Upload
 - [x] Audio Download
-- [ ] Filtering
-  - [ ] Tempo
-  - [ ] Genre
-  - [ ] Key
+- [x] Filtering
+  - [x] Tempo
+  - [x] Genre
+  - [x] Key
 - [ ] Sign-up
 - [x] Login
 - [ ] Sample Packs
